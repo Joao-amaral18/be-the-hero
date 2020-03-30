@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import api from "../../services/api";
 import "./style.css";
 import { FiArrowLeft } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [city, setCity] = useState("");
   const [uf, setUf] = useState("");
+
+  const history = useHistory();
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -24,6 +26,7 @@ export default function Register() {
       const res = await api.post("ongs", data);
 
       alert(`Seu ID de acesso: ${res.data.id}`);
+      history.push("/");
     } catch {
       alert("Erro ao cadastrar");
     }
